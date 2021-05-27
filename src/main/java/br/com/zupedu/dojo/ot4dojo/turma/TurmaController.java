@@ -34,7 +34,7 @@ public class TurmaController {
 
 	  URI uri = uriComponentsBuilder.path("/turmas/{id}").build().toUri();
 
-	  return ResponseEntity.created(uri).body(turma.getId());
+		return ResponseEntity.created(uri).body(turma.getId());
   }
 
 }
