@@ -19,13 +19,13 @@ public class TurmaController {
   private TurmaRepository turmaRepository;
 
 	@PostMapping
-	public ResponseEntity<?> novaTurma(@Valid @RequestBody TurmaRequest request, UriComponentsBuilder uriComponentsBuilder){
+	public ResponseEntity<TurmaResponse> novaTurma(@Valid @RequestBody TurmaRequest request, UriComponentsBuilder uriComponentsBuilder){
 
 		if(turmaRepository.existsByNome(request.getNome())){
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body("Turma já existe");
 		}
 		if (turmaRepository.existsByIniciaEm(request.getIniciaEm())){
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body("Data já existe para uma turma");
 		}
 
 	  Turma turma = request.toModel();
@@ -34,7 +34,7 @@ public class TurmaController {
 
 	  URI uri = uriComponentsBuilder.path("/turmas/{id}").build().toUri();
 
-	  return ResponseEntity.created(uri).build();
+	  return ResponseEntity.created(uri).body(turma.getId());
   }
 
 }
