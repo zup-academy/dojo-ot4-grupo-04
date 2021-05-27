@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TurmaRequest {
@@ -14,18 +15,18 @@ public class TurmaRequest {
 	private String nome;
 
 	@FutureOrPresent
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-	private LocalDateTime iniciaEm;
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+	private LocalDate iniciaEm;
 
 	@FutureOrPresent
-	@JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-	private LocalDateTime terminaEm;
+	@JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+	private LocalDate terminaEm;
 
 	@Deprecated
 	public TurmaRequest() {
 	}
 
-	public TurmaRequest(String nome, LocalDateTime iniciaEm, LocalDateTime terminaEm) {
+	public TurmaRequest(String nome, LocalDate iniciaEm, LocalDate terminaEm) {
 		this.nome = nome;
 		this.iniciaEm = iniciaEm;
 		this.terminaEm = terminaEm;
@@ -39,12 +40,11 @@ public class TurmaRequest {
 		return nome;
 	}
 
-	public LocalDateTime getIniciaEm() {
+	public LocalDate getIniciaEm() {
 		return iniciaEm;
 	}
 
-	public LocalDateTime getTerminaEm() {
+	public LocalDate getTerminaEm() {
 		return terminaEm;
 	}
-
 }

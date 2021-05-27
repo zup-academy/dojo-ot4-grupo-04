@@ -32,9 +32,9 @@ public class TurmaController {
 
 	  turmaRepository.save(turma);
 
-		URI uri =
+	  URI uri = uriComponentsBuilder.path("/turmas/{id}").build().toUri();
 
-	  return ResponseEntity.ok().build();
+	  return ResponseEntity.created(uri).build();
   }
 
 }
