@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/turmas")
@@ -22,10 +23,10 @@ public class TurmaController {
 	public ResponseEntity<?> novaTurma(@Valid @RequestBody TurmaRequest request, UriComponentsBuilder uriComponentsBuilder){
 
 		if(turmaRepository.existsByNome(request.getNome())){
-			return ResponseEntity.badRequest().body(new ValidateErroroOutPut("aluno", "Aluno já existe"));
+			return ResponseEntity.badRequest().body(Arrays.asList(new ValidateErroroOutPut("turma", "Já existe turma com esse nome")));
 		}
 		if (turmaRepository.existsByIniciaEm(request.getIniciaEm())){
-			return ResponseEntity.badRequest().body("Data já existe para uma turma");
+			return ResponseEntity.badRequest().body(Arrays.asList(new ValidateErroroOutPut("turma", "Data já existe para uma turma")));
 		}
 
 	  Turma turma = request.toModel();
